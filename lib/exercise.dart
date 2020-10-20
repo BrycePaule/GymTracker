@@ -1,65 +1,86 @@
 import 'package:flutter/material.dart';
 
-class Exercise extends StatelessWidget {
-  final String name;
-  int sets;
-  int repetitions;
+import './set.dart';
 
-  Exercise(this.name, this.sets, this.repetitions);
+class Exercise extends StatefulWidget {
+  final String name;
+  List<Set> sets;
+
+  Exercise(this.name, this.sets);
 
   @override
+  _ExerciseState createState() => _ExerciseState();
+}
+
+class _ExerciseState extends State<Exercise> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-          color: Colors.red, border: Border.all(color: Colors.white, width: 1)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 6,
-            child: Row(
-              children: [
-                Image(
-                  image: AssetImage('./lib/images/dumbell.png'),
-                  width: 40,
-                  height: 25,
-                  alignment: Alignment.center,
-                ),
-                Text(
-                  name,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  sets.toString(),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: 50,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.red,
+            border: Border.all(color: Colors.white, width: 1)),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 6,
+              child: Row(
+                children: [
+                  Image(
+                    image: AssetImage('./assets/images/dumbell.png'),
+                    width: 40,
+                    height: 25,
+                    alignment: Alignment.center,
                   ),
-                ),
-                Text(
-                  repetitions.toString(),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+                  Text(
+                    widget.name,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 4,
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ...(widget.sets
+                        .map((set) => Padding(
+                              padding: const EdgeInsets.only(top: 4, bottom: 4),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    set.repetitions.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    'x',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  Text(
+                                    set.weight.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ))
+                        .toList())
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

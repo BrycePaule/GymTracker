@@ -24,7 +24,7 @@ class _AccountWindowState extends State<AccountWindow> {
       controller: ScrollController(debugLabel: 'AccountWindowScroll'),
       children: [
         ...(accounts),
-        RaisedButton(onPressed: accounts[0].toggleSelection)
+        // RaisedButton(onPressed: accounts[0].toggleSelection)
       ],
     );
   }

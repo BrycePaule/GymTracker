@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 Color darkenColor(Color color) {
-  return color.withRed(-20).withGreen(-20).withBlue(-20);
+  int r = color.red;
+  int g = color.green;
+  int b = color.blue;
+  return color.withRed(r - 20).withGreen(g - 20).withBlue(b - 20);
 }
 
 Color lightenColor(Color color) {
-  return color.withOpacity(0.0);
+  return color.withAlpha(100);
 }

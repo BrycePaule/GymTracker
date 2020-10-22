@@ -7,7 +7,6 @@ class Account extends StatefulWidget {
   String name;
   Color mainColor;
   Color accentColor;
-  Color deselectedColor;
   Icon icon = Icon(Icons.person);
 
   bool selected = false;
@@ -15,10 +14,9 @@ class Account extends StatefulWidget {
 
   Account(this.name, {this.mainColor: Colors.blue}) {
     this.accentColor = darkenColor(mainColor);
-    this.deselectedColor = Colors.yellow;
   }
 
-    void updateColor(Color newColor) {
+  void updateColor(Color newColor) {
     this.mainColor = newColor;
     this.accentColor = darkenColor(newColor);
   }
@@ -43,7 +41,7 @@ class _AccountState extends State<Account> {
           decoration: BoxDecoration(
               color: (this.widget.selected == true)
                   ? this.widget.mainColor
-                  : this.widget.deselectedColor
+                  : lightenColor(this.widget.mainColor)
               // color: this.widget.mainColor,
               ),
           child: Column(
@@ -61,7 +59,9 @@ class _AccountState extends State<Account> {
               Expanded(
                 flex: 3,
                 child: Container(
-                  color: this.widget.accentColor,
+                  color: (this.widget.selected == true)
+                      ? this.widget.accentColor
+                      : lightenColor(this.widget.accentColor),
                   child: Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

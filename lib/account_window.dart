@@ -8,8 +8,28 @@ class AccountWindow extends StatefulWidget {
 }
 
 class _AccountWindowState extends State<AccountWindow> {
+  Account activeAccount;
+
+  setActiveAccount(String account) {
+    setState(() {
+      print(account);
+    });
+    // this.activeAccount = account
+    // print(account);
+    // setState(() {});
+  }
+
+  _printTrash(String trash) {
+    print(trash);
+    setState(() {});
+  }
+
   List<Account> accounts = [
-    Account('Bryce', mainColor: Colors.red),
+    Account(
+      'Bryce',
+      selectionCallback: _printTrash,
+      mainColor: Colors.red,
+    ),
     Account('Remy'),
     Account('Tanaya'),
     Account('Josh'),
@@ -24,7 +44,6 @@ class _AccountWindowState extends State<AccountWindow> {
       controller: ScrollController(debugLabel: 'AccountWindowScroll'),
       children: [
         ...(accounts),
-        // RaisedButton(onPressed: accounts[0].toggleSelection)
       ],
     );
   }
